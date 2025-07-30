@@ -1,3 +1,4 @@
+# utils/helpers.py
 import random
 from characters import Warrior, Mage, Rogue
 
@@ -29,28 +30,34 @@ def create_random_enemy(exclude_user=None):
     mage_names = ["다크 위저드", "푸른염화술사", "빙결마법사"]
     rogue_names = ["그림자 암살자", "도둑 두목", "닌자 거북이"]
     
-    # 플레이어와 다른 클래스 적 생성
-    if exclude_user == Warrior:
-        # 플레이어가 전사면 '마법사나 도적' 적 생성
+    # 플레이어와 다른 클래스의 적을 생성
+    if exclude_user and isinstance(exclude_user, Warrior):
+        # 플레이어가 전사면 마법사나 도적 생성
         if random.choice([True, False]):
-            enemy_name = random.choice(mage_names)
-            return Mage(enemy_name)
+            return Mage(random.choice(mage_names))
         else:
-            enemy_name = random.choice(rogue_names)
-            return Rogue(enemy_name)
-    elif exclude_user == Mage:
-        # 플레이어가 마법사면 '전사나 도적' 적 생성
+            return Rogue(random.choice(rogue_names))
+    
+    elif exclude_user and isinstance(exclude_user, Mage):
+        # 플레이어가 마법사면 전사나 도적 생성
         if random.choice([True, False]):
-            enemy_name = random.choice(warrior_names)
-            return Warrior(enemy_name)
+            return Warrior(random.choice(warrior_names))
         else:
-            enemy_name = random.choice(rogue_names)
-            return Rogue(enemy_name)
-    elif exclude_user == Rogue:
-        # 플레이어가 도적이면 '전사나 마법사' 적 생성
+            return Rogue(random.choice(rogue_names))
+    
+    elif exclude_user and isinstance(exclude_user, Rogue):
+        # 플레이어가 도적이면 전사나 마법사 생성
         if random.choice([True, False]):
-            enemy_name = random.choice(warrior_names)
-            return Warrior(enemy_name)
+            return Warrior(random.choice(warrior_names))
         else:
-            enemy_name = random.choice(mage_names)
-            return Mage(enemy_name)
+            return Mage(random.choice(mage_names))
+    
+    else:
+        # 기본 랜덤 생성 (exclude_user가 None이거나 예상치 못한 타입인 경우!!!!)
+        random_choice = random.randint(1, 3)
+        if random_choice == 1:
+            return Warrior(random.choice(warrior_names))
+        elif random_choice == 2:
+            return Mage(random.choice(mage_names))
+        else:
+            return Rogue(random.choice(rogue_names))
