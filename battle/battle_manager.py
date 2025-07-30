@@ -30,8 +30,8 @@ class BattleManager:
         time.sleep(self.battle_delay)
 
         turn = 1
-        minimum_turns = 6
-        # 적어도 turn6까지 게임을 진행하기 위해
+        minimum_turns = 4
+        # 적어도 turn4까지 게임을 진행하기 위해
         while turn <= minimum_turns or (player.is_alive() and enemy.is_alive()):
             print(f"\n◻◻◻ Turn {turn} ◻◻◻")
 
@@ -58,7 +58,7 @@ class BattleManager:
             time.sleep(self.battle_delay)
             turn += 1
 
-            if turn % 6 == 0:
+            if turn % 4 == 0:
                 print("\n◻◻◻ 현재 상태 ◻◻◻")
                 player.show_status()
                 print()
