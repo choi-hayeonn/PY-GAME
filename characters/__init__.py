@@ -1,4 +1,5 @@
-# character/__init__.py
+# characters/__init__.py
+from .character import Character
 from .warrior import Warrior
 from .mage import Mage
 from .rogue import Rogue

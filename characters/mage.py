@@ -51,7 +51,7 @@ class Mage(Character):
         print(f"남은 마나: {self.mana}/{self.max_mana}")
     
     def show_status(self):
-        """마법사의 상태 정보 출력 (+ 마나, 콤보)"""
+        # 마법사의 상태 정보 출력 (+ 마나, 콤보) 
         super().show_status()
         print(f"마나: {self.mana}/{self.max_mana}")
         print(f"콤보: {self.spell_combo}")
